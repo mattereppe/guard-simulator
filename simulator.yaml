@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: simulator
+  labels: 
+    ddos: simulator
+spec:
+  template:
+    spec:
+      hostname: simulator
+      containers:
+        - name: simulator
+          image: ghcr.io/mattereppe/guard-simulator:main
+          imagePullPolicy: Always
+          env:
+            - name: REPEAT
+              value: "2"
+            - name: MAXDELAY
+              value: "2"
+      restartPolicy: OnFailure
