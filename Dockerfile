@@ -13,7 +13,7 @@ ENV MAXDELAY=4
 
 # Clone the goldeneye repository from github
 RUN apt-get update && \
-	apt-get -y install python3 jq && \
+	apt-get -y install curl jq && \
 	cd /usr/local/bin/ 
 	
 COPY simulator.sh /usr/local/bin
