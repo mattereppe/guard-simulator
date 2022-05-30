@@ -169,5 +169,6 @@ done
 #fi
 echo "Number of departments to simulate = $departments";
 echo "Number of users to simulate = $users";
+echo "Max delays between requests = $max_delay";
 runSimulation;
 
