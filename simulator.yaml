@@ -13,8 +13,8 @@ spec:
           image: ghcr.io/mattereppe/guard-simulator:main
           imagePullPolicy: Always
           env:
-            - name: REPEAT
-              value: "2"
+            - name: USERS
+              value: "4"
             - name: MAXDELAY
-              value: "2"
+              value: "8"
       restartPolicy: OnFailure
