@@ -2,18 +2,20 @@
 
 Simulator for the Medial Records application. It emulates a doctor that access the data of two patients.
 
-There are two optional parameters, to repeat the request and to set the "speed" to make calls within the request.
+There are two optional parameters, to repeat the request and to set the "speed" to make calls within the request:
+- -u <N> number of iterations;
+- -d <D> the maximum delay between http calls (the real value is a random number betweeen 0 and D).
+
+With a smaller value of D, the session will be faster; with a larger value of D, the session will be faster.
+  
+Example: 
+```
+  ./simulator.sh -d 3 -u 2
+```
+This emulates two times access to data of two patients, with a maximum delay of 3 seconds between every http request.
+  
+The Docker version provides the two arguments as environment variables. Specifically:
+  - REPEAT is the argument to be provided to -u (default=1);
+  - MAXDELAY is the argument to be provided to -d in seconds (default=4).
 
 
-
-I parametri sono opzionali, se lo lanci direttamente simula la navigazione fatta tramite client per consultare i dati di due pazienti
-
-i due parametri previsti permettono di ripetere n volte la richiesta completa e di scegliere la "velocità" con cui vengono fatte le chiamate dentro alla richiesta
-
-in particolare con -u scegli il numero di iterazioni
-
-con -d il ritardo massimo tra una chiamata http e l'altra, il valore effettivo viene preso in modo random tra 0 secondi e questo valore (default 4) quindi diminuendolo la sessione sarà più veloce, aumentandolo più lento
-
-es: ./simulator.sh -d 3 -u 2
-
-in questo caso simula 2 volte la consultazione dei dati di due pazienti prevedendo un tempo massimo di 3 secondi tra una chiamata http e l'altra
