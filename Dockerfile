@@ -8,23 +8,16 @@
 from debian:bullseye
 
 # Simulator main parameters
-ENV WORKERS=10
-ENV SOCKETS=500
-ENV METHOD=get
-
-# Default to MAGGIOLI testbed
-ENV URL="https://guard-test-department-0.maggiolicloud.it/"
+ENV REPEAT=1
+ENV MAXDELAY=4
 
 # Clone the goldeneye repository from github
 RUN apt-get update && \
 	apt-get -y install python3 jq && \
-	cd /usr/src/ && \
-	mkdir goldeneye && \
-	cd goldeneye && \
-	git clone https://github.com/jseidl/GoldenEye.git . 
+	cd /usr/local/bin/ 
 	
+COPY simulator.sh /usr/local/bin
+	
+WORKDIR /usr/local/bin
 
-WORKDIR /usr/src/goldeneye
-
-
-CMD ./goldeneye.py $URL -w $WORKERS -s $SOCKETS -m $METHOD
+CMD /usr/local/bin/simulator.sh -u $REPEAT -d $MAXDELAY
