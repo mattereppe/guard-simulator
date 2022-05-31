@@ -20,4 +20,4 @@ COPY simulator.sh /usr/local/bin
 	
 WORKDIR /usr/local/bin
 
-CMD /usr/local/bin/simulator.sh -u $USERS -d $MAXDELAY
+CMD /usr/local/bin/simulator.sh -u $USERS -d $MAXDELAY -l
