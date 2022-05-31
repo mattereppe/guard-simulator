@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# kill all process group
+# https://stackoverflow.com/a/2173421
+trap "trap - SIGTERM && kill -- -$$" SIGINT SIGTERM EXIT
+
 MAX_DEPARTMENTS=4
 max_delay=4             # Max delay beetween requests
 users=1
@@ -152,6 +156,8 @@ while [ "$1" != "" ]; do
         -d | --max-delay )      shift
                                 max_delay="$1"
                                 ;;
+        -l | --loop )           loop=true
+                                ;;
         -h | --help )           usage
                                 exit
                                 ;;
@@ -170,5 +176,19 @@ done
 echo "Number of departments to simulate = $departments";
 echo "Number of users to simulate = $users";
 echo "Max delays between requests = $max_delay";
-runSimulation;
 
+if [ "$loop" = true ]; then
+	echo "Running in loop..."
+	loop_no=1
+	while true; do
+		printf '=%0.s' {1..80}; printf '\n'
+		printf ' %0.s' {1..35}; printf "Loop: ${loop_no}\n"
+		printf '=%0.s' {1..80}; printf '\n'
+
+		runSimulation
+		loop_no=$(( $loop_no + 1 ))
+	done
+else
+	echo "Running once..."
+	runSimulation;
+fi
